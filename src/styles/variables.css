@@ -1,0 +1,32 @@
+:root {
+    /* Colors - Futuristic Cyberpunk Palette */
+    --bg-dark: #050507;
+    --bg-card: rgba(20, 20, 30, 0.6);
+    --bg-glass: rgba(255, 255, 255, 0.05);
+
+    --primary: #00f3ff;
+    /* Neon Cyan */
+    --primary-dim: rgba(0, 243, 255, 0.1);
+    --secondary: #bc13fe;
+    /* Neon Purple */
+    --accent: #ff0055;
+    /* Alert/Highlight Red */
+
+    --text-main: #e6f1ff;
+    --text-muted: #8892b0;
+
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --border-neon: rgba(0, 243, 255, 0.5);
+
+    /* Shadows & Glows */
+    --glow-primary: 0 0 20px rgba(0, 243, 255, 0.4);
+    --glow-secondary: 0 0 20px rgba(188, 19, 254, 0.4);
+    --shadow-card: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+
+    /* Typography */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Orbitron', 'Inter', sans-serif;
+
+    /* Spacing */
+    --nav-height: 80px;
+}

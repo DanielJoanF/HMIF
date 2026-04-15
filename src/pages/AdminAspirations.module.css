@@ -1,0 +1,175 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background: #0f0f1e;
+    color: white;
+}
+
+.sidebar {
+    width: 250px;
+    background: #1a1a2e;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.logo h2 {
+    color: #667eea;
+    font-size: 1.5rem;
+}
+
+.nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.navItem {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.navItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+.navItem.active {
+    background: #667eea;
+    color: white;
+}
+
+.logoutBtn {
+    background: #ff6b6b;
+    border: none;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin: 0 0 20px 0;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filterBtn,
+.filterActive {
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filterActive {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.table {
+    background: #1a1a2e;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tableHeader {
+    display: grid;
+    grid-template-columns: 120px 1fr 150px 150px;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+}
+
+.tableRow {
+    display: grid;
+    grid-template-columns: 120px 1fr 150px 150px;
+    gap: 15px;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    align-items: center;
+}
+
+.tag {
+    background: #667eea;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+}
+
+.date {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.deleteBtn {
+    background: #ff6b6b;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.deleteBtn:hover {
+    background: #ff5252;
+}
+
+.empty {
+    padding: 60px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #0f0f1e;
+    color: white;
+    font-size: 1.5rem;
+}

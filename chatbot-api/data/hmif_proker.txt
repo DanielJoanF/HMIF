@@ -1,0 +1,19 @@
+PROGRAM KERJA HMIF USD 2025/2026
+
+1. Informatika Belajar 1 (IF 1)
+   Program pembelajaran akademik untuk meningkatkan pemahaman dasar mahasiswa Informatika.
+
+2. Informatika Belajar 2 (IF 2)
+   Program lanjutan untuk pendalaman materi dan peningkatan kompetensi akademik.
+
+3. Sanata Dharma Open Source (SaOS)
+   Program kolaborasi dan pengembangan proyek open source mahasiswa Informatika.
+
+4. Kunjungan Perusahaan (KP)
+   Kegiatan kunjungan industri untuk mengenal dunia kerja di bidang teknologi dan informatika.
+
+5. Ikatan Alumni Sanata Dharma (IASD)
+   Program menjalin relasi dengan alumni guna berbagi pengalaman dan wawasan karier.
+
+6. Informatika Days (IT DAYS)
+   Event tahunan yang mencakup lomba, seminar, workshop, dan kegiatan teknologi.

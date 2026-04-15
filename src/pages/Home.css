@@ -1,0 +1,341 @@
+.home-page {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #050505;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Background Logo Layer (Faded behind everything) */
+.hero-logo-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    /* Lowest level, behind text */
+    width: 60vh;
+    height: 60vh;
+    opacity: 0.15;
+    /* Subtle fade */
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-logo-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    /* Optional: makes it blend better */
+}
+
+/* Foreground Text Layer */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 3;
+    /* Above logo */
+    text-align: center;
+    pointer-events: none;
+    grid-column: 1 / -1;
+    /* Span entire width to ensure true center */
+}
+
+.hero-text .line {
+    font-size: clamp(6rem, 18vw, 25rem);
+    font-weight: 900;
+    line-height: 0.8;
+    color: #fff;
+    white-space: nowrap;
+    text-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    /* Add shadow to pop against logo */
+    mix-blend-mode: normal;
+    /* Reset any blend mode so it sits on top clear */
+}
+
+/* REMOVED .hero-figure styles as it is replaced by .hero-logo-bg */
+
+/* Left: Info Content */
+.hero-info {
+    grid-column: 1;
+    align-self: end;
+    margin-bottom: 100px;
+    z-index: 10;
+    width: 100%;
+}
+
+.hero-info h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.hero-info p {
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    max-width: 400px;
+}
+
+.arrow-link {
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+}
+
+/* Right: Side Card */
+.side-card {
+    grid-column: 3;
+    align-self: center;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #222;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.play-icon {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* Floating Orb - Decorative */
+.floating-orb {
+    position: absolute;
+    bottom: 15%;
+    left: 10%;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #444, #000);
+    border-radius: 50%;
+    z-index: 3;
+    animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+/* Action Button Centered */
+.action-button-container {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+.start-btn {
+    background: #fff;
+    color: #000;
+    font-weight: 800;
+    padding: 1rem 3rem;
+    border-radius: 100px;
+    border: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .hero-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        padding-top: 100px;
+        gap: 3rem;
+    }
+
+    .hero-text .line {
+        font-size: 18vw;
+    }
+
+    .hero-figure {
+        order: 1;
+        height: 40vh;
+    }
+
+    .hero-figure img {
+        max-height: 100%;
+    }
+
+    .hero-info {
+        order: 2;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .hero-info p {
+        margin: 0 auto 2rem auto;
+    }
+
+    .side-card {
+        order: 3;
+        margin: 0 auto 4rem auto;
+        position: relative;
+        z-index: 20;
+        /* Ensure it stays above the text */
+    }
+
+    .action-button-container {
+        display: none;
+        /* Hide floating button on mobile, maybe move to info? */
+    }
+
+    /* Show button in info on mobile if needed, or keep it fixed */
+    /* .hero-info::after { } */
+}
+
+/* CAROUSEL STYLES */
+.carousel-indicators {
+    display: flex;
+    gap: 5px;
+}
+
+.indicator {
+    width: 6px;
+    height: 6px;
+    background: #555;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: #fff;
+    transform: scale(1.2);
+}
+
+.event-image-container {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.event-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    padding: 20px 15px 15px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.event-title {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+}
+
+.event-date {
+    color: #aaa;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.play-icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    z-index: 5;
+}
+
+.card-image:hover .play-icon-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.card-image:hover .event-image-container {
+    filter: brightness(0.6);
+}

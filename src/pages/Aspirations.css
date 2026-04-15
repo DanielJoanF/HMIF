@@ -1,0 +1,192 @@
+.aspiration-page {
+    min-height: 100vh;
+    padding-top: 100px;
+    background-color: #050505;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.aspiration-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header & Form Section */
+.form-section {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.form-title {
+    font-size: 3.5rem;
+    letter-spacing: 5px;
+    margin-bottom: 1rem;
+    font-family: var(--font-display);
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.form-subtitle {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.main-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #333;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.3s ease;
+    font-family: var(--font-body);
+    resize: none;
+    height: 60px;
+    /* Initial height */
+    overflow: hidden;
+}
+
+.main-input:focus {
+    border-color: #fff;
+}
+
+.main-input::placeholder {
+    color: #333;
+    font-style: italic;
+}
+
+/* Controls (Tag + Submit) */
+.form-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+/* Show controls when input is focused or has value */
+.input-group:focus-within~.form-controls,
+.form-controls.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.tag-select {
+    background: transparent;
+    border: 1px solid #444;
+    color: #888;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tag-select:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+.submit-btn-minimal {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 0.5rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.submit-btn-minimal:hover {
+    transform: scale(1.05);
+}
+
+.submit-btn-minimal:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Wall / Grid Section */
+.wall-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.aspiration-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 0;
+    /* Minimalist sharp corners */
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.aspiration-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.card-tag {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    border: 1px solid #333;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    color: #ddd;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+/* Floating Quote Icon for style */
+.quote-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.05);
+    font-family: serif;
+    pointer-events: none;
+}

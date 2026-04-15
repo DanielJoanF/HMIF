@@ -1,0 +1,47 @@
+.footer {
+    border-top: 1px solid var(--border-glass);
+    background: black;
+    padding: 40px 0;
+    margin-top: 80px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+}
+
+.brand h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.brand p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.link {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.link:hover {
+    color: var(--primary);
+}
+
+.copy {
+    color: #444;
+    font-size: 0.8rem;
+    margin-top: 16px;
+}

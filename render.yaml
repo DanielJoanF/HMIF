@@ -1,0 +1,48 @@
+# Render.com Configuration
+# Deploy all 3 services with one click
+
+services:
+  # Frontend Static Site (Vite React Build)
+  - type: static
+    name: hmif-platform-frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://hmif-platform-api.onrender.com
+      - key: VITE_CHATBOT_URL
+        value: https://hmif-platform-chatbot.onrender.com
+
+  # Backend Express API
+  - type: web
+    name: hmif-platform-api
+    runtime: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false  # Set manually in Render dashboard
+      - key: ADMIN_PASSWORD
+        sync: false  # Set manually in Render dashboard
+      - key: CHATBOT_SERVICE_URL
+        value: https://hmif-platform-chatbot.onrender.com
+
+  # Chatbot FastAPI Python Service
+  - type: web
+    name: hmif-platform-chatbot
+    runtime: python
+    buildCommand: pip install -r chatbot-api/requirements.txt
+    startCommand: cd chatbot-api && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: GROQ_API_KEY
+        sync: false  # Set manually in Render dashboard
