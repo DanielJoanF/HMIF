@@ -14,75 +14,75 @@ import jodi from '../assets/jodi.jpeg';
 export const hmifMembers = {
     title: "PENGURUS HMIF 2025/2026",
     bph: [
-        { jabatan: "Ketua", nama: "Tio Alan Kurniawan", foto: tio, caption: "Memimpin dengan hati, melangkah dengan visi." },
-        { jabatan: "Wakil Ketua", nama: "Tumba TL.Sihombing", foto: tumba, caption: "Bersama kita bisa, bersatu kita kuat." },
-        { jabatan: "Sekretaris", nama: "Advhenita Destriana Wiwonto", foto: vhean, caption: "Detail kecil menciptakan hal besar." },
-        { jabatan: "Bendahara", nama: "Elvinda Kenia Tri Prastika", foto: vinda, caption: "Transparansi adalah kunci kepercayaan." },
+        { jabatan: "Ketua", nama: "Tio Alan Kurniawan", foto: tio, caption: "Seperti pepatah Solo itu 'Everything Will Be Fine, No Need To Worry'" },
+        { jabatan: "Wakil Ketua", nama: "Tumba TL.Sihombing", foto: tumba, caption: "yang penting hidup" },
+        { jabatan: "Sekretaris", nama: "Advhenita Destriana Wiwonto", foto: vhean, caption: "Life is a game be a player or be played" },
+        { jabatan: "Bendahara", nama: "Elvinda Kenia Tri Prastika", foto: vinda, caption: "jalani aja" },
     ],
     divisions: [
         {
             name: "Divisi Minat & Bakat",
-            coordinator: { nama: "Pebrianus Regis Sabomban", foto: regis, caption: "Bakat tanpa usaha hanyalah potensi." },
+            coordinator: { nama: "Pebrianus Regis Sabomban", foto: regis, caption: "Eperiting ish gona be olyait" },
             members: [
-                { nama: "Jodi Saputra Sitanggang", foto: jodi, caption: "Kreativitas tidak mengenal batas." },
-                { nama: "Burju Efraim Purba", foto: defaultPhoto, caption: "Terus berkarya, terus berproses." },
-                { nama: "Felicia Anggun Devika", foto: defaultPhoto, caption: "Setiap langkah kecil adalah kemajuan." },
-                { nama: "Virly Setyo Eka Andrian", foto: defaultPhoto, caption: "Semangat adalah bahan bakar kesuksesan." },
-                { nama: "Benedictus Alphonsius Putra Prasetya", foto: defaultPhoto, caption: "Konsistensi mengalahkan segalanya." },
-                { nama: "Stevany Geraldi Rade", foto: defaultPhoto, caption: "Berbagi inspirasi, menumbuhkan motivasi." },
+                { nama: "Jodi Saputra Sitanggang", foto: jodi, caption: "108720970793 Bank Jago" },
+                { nama: "Burju Efraim Purba", foto: defaultPhoto, caption: "Ini gimana kaburnya?" },
+                { nama: "Felicia Anggun Devika", foto: defaultPhoto, caption: "Jika semua berjalan sesuai keinginan Mu itu bukan takdir melainkan kerja keras mu, teruslah berusaha!" },
+                { nama: "Virly Setyo Eka Andrian", foto: defaultPhoto, caption: "arah, ini ayahnya kemana?" },
+                { nama: "Benedictus Alphonsius Putra Prasetya", foto: defaultPhoto, caption: "Si Tou Timou Tumou To" },
+                { nama: "Stevany Geraldi Rade", foto: defaultPhoto, caption: "Setiap pencapaian besar dimulai dengan keputusan untuk mencoba." },
             ]
         },
         {
             name: "Divisi Media Komunikasi & Informasi",
-            coordinator: { nama: "Thomas Paskal Eka Hari Murti", foto: paskal, caption: "Informasi yang tepat mengubah segalanya." },
+            coordinator: { nama: "Thomas Paskal Eka Hari Murti", foto: paskal, caption: "Ad Maiorem Dei Gloriam" },
             members: [
-                { nama: "Yohana Sarnike Bulu", foto: defaultPhoto, caption: "Komunikasi adalah jembatan antar hati." },
-                { nama: "Michael Gelar Swasana Jati", foto: defaultPhoto, caption: "Desain berbicara lebih dari kata-kata." },
-                { nama: "Robertus Ardian Satrio Prabowo", foto: defaultPhoto, caption: "Ceritakan dunia lewat konten bermakna." },
-                { nama: "Gerasimus Fridolin Juan Dua", foto: defaultPhoto, caption: "Inovasi lahir dari keberanian mencoba." },
-                { nama: "Ramaeyza Nada Nadhifa", foto: defaultPhoto, caption: "Kreativitas tanpa batas, karya tanpa henti." },
+                { nama: "Yohana Sarnike Bulu", foto: defaultPhoto, caption: "In progress" },
+                { nama: "Michael Gelar Swasana Jati", foto: defaultPhoto, caption: "Sukses tak perlu berdasi, cukup kerja keras dan tak kenal gengsi" },
+                { nama: "Robertus Ardian Satrio Prabowo", foto: defaultPhoto, caption: "Sorry agak jelek, Desainer kita lagi cuti guys" },
+                { nama: "Gerasimus Fridolin Juan Dua", foto: defaultPhoto, caption: "Viam inveniam aut faciam" },
+                { nama: "Ramaeyza Nada Nadhifa", foto: defaultPhoto, caption: "carpe diem" },
             ]
         },
         {
             name: "Divisi Humas & Advokasi",
-            coordinator: { nama: "Yoas Flegon Angi Saputra", foto: yoas, caption: "Suara mahasiswa adalah suara perubahan." },
+            coordinator: { nama: "Yoas Flegon Angi Saputra", foto: yoas, caption: "oke" },
             members: [
-                { nama: "Gabriel Batista Bimantara Dumais", foto: defaultPhoto, caption: "Jadi jembatan, bukan tembok." },
-                { nama: "Genoveva Anela Reva Putri Adipna", foto: defaultPhoto, caption: "Advokasi dimulai dari kepedulian." },
-                { nama: "Angela Kasih Christy Maharani", foto: defaultPhoto, caption: "Berjuang untuk yang benar, berdiri untuk semua." },
+                { nama: "Gabriel Batista Bimantara Dumais", foto: defaultPhoto, caption: "ya BEBAS" },
+                { nama: "Genoveva Anela Reva Putri Adipna", foto: defaultPhoto, caption: " to infinity and beyond!" },
+                { nama: "Angela Kasih Christy Maharani", foto: defaultPhoto, caption: "Let whoever think whatever" },
             ]
         },
         {
             name: "Divisi Sosial",
-            coordinator: { nama: "Agustinus Wisik", foto: defaultPhoto, caption: "Melayani sesama adalah panggilan jiwa." },
+            coordinator: { nama: "Agustinus Wisik", foto: defaultPhoto, caption: "Urip Iku Urup" },
             members: [
-                { nama: "Yohana Melly Barmita Sari", foto: defaultPhoto, caption: "Kebaikan kecil berdampak besar." },
-                { nama: "Agustinus Eko Kristiawan", foto: defaultPhoto, caption: "Peduli itu gratis, tapi tak ternilai." },
-                { nama: "Maria Rufina Editha Kedhi", foto: defaultPhoto, caption: "Berbagi senyum, menebarkan kebahagiaan." },
+                { nama: "Yohana Melly Barmita Sari", foto: defaultPhoto, caption: "atur ajalah, pengen tidur" },
+                { nama: "Agustinus Eko Kristiawan", foto: defaultPhoto, caption: "Ada pilus diatas gorden, waktunya wong tulus suren." },
+                { nama: "Maria Rufina Editha Kedhi", foto: defaultPhoto, caption: "Every day,i choose to rise and shine" },
             ]
         },
         {
             name: "Divisi Web Holder",
-            coordinator: { nama: "Wilston Laurentius Dai Keraf", foto: defaultPhoto, caption: "Kode yang rapi, solusi yang indah." },
+            coordinator: { nama: "Wilston Laurentius Dai Keraf", foto: defaultPhoto, caption: "Jinzou Faiya Faibo Waipa" },
             members: [
-                { nama: "Daniel Joan Fernando", foto: defaultPhoto, caption: "Setiap bug adalah pelajaran baru." },
+                { nama: "Daniel Joan Fernando", foto: defaultPhoto, caption: "Perbaiki yang kurang, kurangi yang berlebihan dan bersyukur dengan apa yang sudah ditakdirkan." },
             ]
         },
         {
             name: "Divisi PSDM",
-            coordinator: { nama: "Gabriella Nava Trivana Irianto", foto: nava, caption: "Membangun manusia, membangun masa depan." },
+            coordinator: { nama: "Gabriella Nava Trivana Irianto", foto: nava, caption: "rambut warna warni bagai gulali" },
             members: [
-                { nama: "Bernardus Febrian", foto: defaultPhoto, caption: "Tumbuh bersama dalam setiap tantangan." },
-                { nama: "Celsia Aprilia Timang", foto: defaultPhoto, caption: "Potensi terbaik lahir dari pengembangan diri." },
+                { nama: "Bernardus Febrian", foto: defaultPhoto, caption: "Berdoa dan Bekerja" },
+                { nama: "Celsia Aprilia Timang", foto: defaultPhoto, caption: "In nomine Patris et Filii et Spiritus Sancti" },
             ]
         },
         {
             name: "Divisi Kewirausahaan",
-            coordinator: { nama: "Rachel Rambu Sedu Oyi", foto: rachel, caption: "Peluang ada di mana-mana bagi yang berani." },
+            coordinator: { nama: "Rachel Rambu Sedu Oyi", foto: rachel, caption: "Ayoo ayoo, beli jualan KWU ><" },
             members: [
-                { nama: "Maximillianus Mahasmara", foto: max, caption: "Gagal itu biasa, menyerah itu pilihan." },
-                { nama: "Gabriela Angelina Olivia Hure", foto: defaultPhoto, caption: "Wirausaha dimulai dari keberanian pertama." },
-                { nama: "Georgius Satria Putra Pamungkas", foto: defaultPhoto, caption: "Bisnis bukan soal untung, tapi soal dampak." },
+                { nama: "Maximillianus Mahasmara", foto: max, caption: "Googoo GaGa" },
+                { nama: "Gabriela Angelina Olivia Hure", foto: defaultPhoto, caption: "Ngoding jalan, jualan juga jalan, jalan sama kamu kapan?" },
+                { nama: "Georgius Satria Putra Pamungkas", foto: defaultPhoto, caption: "Makan,tidur, ngoding ,buka fesnuk, jualan." },
             ]
         },
     ]

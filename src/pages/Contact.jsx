@@ -1,6 +1,6 @@
 import React from 'react';
 import './Contact.css';
-import logo from '../assets/default-member.jpg';
+import logo from '../assets/fotbar-HMIF.jpg';
 
 const Contact = () => {
     return (
@@ -19,7 +19,7 @@ const Contact = () => {
 
                     <div className="contact-block">
                         <span className="label">EMAIL OFFICIAL</span>
-                        <a href="mailto:hmjtisanatadharma@gmail.com" className="contact-link text-display">hmjtisanatadharma@gmail.com</a>
+                        <a href="mailto:hmjtisanatadharma@gmail.com" className="contact-link text-display">HMIF</a>
                     </div>
 
                     <div className="contact-block">
@@ -32,7 +32,8 @@ const Contact = () => {
 
                     <div className="socials">
                         <span className="label" style={{ marginRight: '1rem', alignSelf: 'center', marginBottom: 0 }}>MEDIA SOSIAL:</span>
-                        <a href="https://instagram.com/hmif.usd" target="_blank" rel="noopener noreferrer">@hmif.usd</a>
+                        <a href="https://instagram.com/hmif.usd" target="_blank" rel="noopener noreferrer">IG: @hmif.usd</a>
+                        <a href="https://www.tiktok.com/@hmif_usd?_r=1&_t=ZS-95bpDd9T06O" target="_blank" rel="noopener noreferrer">TikTok: @hmif_usd</a>
                     </div>
                 </div>
 

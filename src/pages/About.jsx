@@ -2,7 +2,7 @@ import React from 'react';
 
 import MemberSection from '../components/MemberSection';
 import './About.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/fotbar-HMIF.jpg';
 
 const About = () => {
     return (
