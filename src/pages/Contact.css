@@ -112,5 +112,115 @@
 }
 
 .contact-visual:hover img {
-    transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .contact-page {
+    padding-top: 70px;
+  }
+
+  .contact-info {
+    padding: 3rem 1.5rem;
+    padding-left: 5%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .contact-block {
+    margin-bottom: 2.5rem;
+  }
+
+  .label {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-link {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .contact-link:hover {
+    text-underline-offset: 6px;
+  }
+
+  .address {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .socials {
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .socials a {
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+
+  .socials a::before {
+    left: -10px;
+    width: 5px;
+    height: 5px;
+  }
+
+  .contact-visual {
+    min-height: 300px;
+  }
+
+  .contact-visual img {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page {
+    padding-top: 60px;
+  }
+
+  .contact-info {
+    padding: 2rem 1rem;
+    padding-left: 3%;
+  }
+
+  .contact-block {
+    margin-bottom: 2rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-link {
+    font-size: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  .address {
+    font-size: 0.9rem;
+  }
+
+  .socials {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .socials a {
+    font-size: 0.85rem;
+  }
+
+  .socials a::before {
+    display: none;
+  }
+
+  .contact-visual {
+    min-height: 250px;
+  }
+
+  .contact-visual img {
+    padding: 1.5rem;
+  }
 }

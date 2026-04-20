@@ -376,17 +376,116 @@
 }
 
 @media (max-width: 600px) {
-    .orgLevel {
-        flex-direction: column;
-        align-items: center;
-    }
+  .orgLevel {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .connector {
-        display: none;
-    }
+  .connector {
+    display: none;
+  }
 
-    .card {
-        width: 100%;
-        max-width: 320px;
-    }
+  .card {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .sectionTitle::after {
+    width: 60%;
+    left: 20%;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 280px;
+    padding: 20px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 16px;
+  }
+
+  .avatarPlaceholder {
+    font-size: 2.5rem;
+  }
+
+  .leader .avatarPlaceholder {
+    font-size: 3rem;
+  }
+
+  .nama {
+    font-size: 1rem;
+  }
+
+  .jabatan {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+  }
+
+  .divisionName {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .divisionsContainer {
+    padding: 0 1rem;
+    gap: 30px;
+  }
+
+  .divisionBox {
+    padding: 25px;
+  }
+
+  .divisionMembers {
+    gap: 16px;
+    margin-top: 1.5rem;
+  }
+
+  .modalOverlay {
+    padding: 15px;
+  }
+
+  .modalContent {
+    max-width: 95%;
+    padding: 20px;
+  }
+
+  .modalImage {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 15px;
+  }
+
+  .modalName {
+    font-size: 1.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .modalCaption {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .modalClose {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
 }

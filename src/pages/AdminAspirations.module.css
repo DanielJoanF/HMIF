@@ -165,11 +165,200 @@
 }
 
 .loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #0f0f1e;
-    color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #0f0f1e;
+  color: white;
+  font-size: 1.5rem;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 100px 1fr 120px 120px;
+    gap: 10px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    padding: 15px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: auto;
+    overflow-x: auto;
+  }
+
+  .logo {
+    margin-bottom: 0;
+    margin-right: 20px;
+    white-space: nowrap;
+  }
+
+  .logo h2 {
+    font-size: 1.25rem;
+  }
+
+  .nav {
+    flex-direction: row;
+    flex: none;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .navItem {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .logoutBtn {
+    display: none;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+    margin-bottom: 15px;
+  }
+
+  .filters {
+    gap: 8px;
+  }
+
+  .filterBtn,
+  .filterActive {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 80px 1fr 100px 100px;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .tableHeader {
+    font-size: 0.9rem;
+  }
+
+  .tag {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+
+  .text {
+    font-size: 0.9rem;
+  }
+
+  .date {
+    font-size: 0.8rem;
+  }
+
+  .deleteBtn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .empty {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    padding: 10px;
+  }
+
+  .logo h2 {
+    font-size: 1.1rem;
+  }
+
+  .navItem {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .main {
+    padding: 15px;
+  }
+
+  .header {
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
     font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .filters {
+    gap: 6px;
+  }
+
+  .filterBtn,
+  .filterActive {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .table {
+    overflow-x: auto;
+  }
+
+  .tableHeader,
+  .tableRow {
+    min-width: 400px;
+    grid-template-columns: 70px 1fr 90px 90px;
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .tableHeader {
+    font-size: 0.8rem;
+  }
+
+  .tag {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
+
+  .text {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .date {
+    font-size: 0.75rem;
+  }
+
+  .deleteBtn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .empty {
+    padding: 30px;
+    font-size: 0.9rem;
+  }
+
+  .loading {
+    font-size: 1.2rem;
+  }
 }

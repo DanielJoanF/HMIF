@@ -236,10 +236,80 @@
 }
 
 @media (max-width: 480px) {
+  .fab {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
   .panel {
     width: auto;
-    left: 20px;
-    right: 20px;
-    bottom: 100px;
+    left: 10px;
+    right: 10px;
+    bottom: 85px;
+    height: 400px;
+    max-height: 70vh;
+    border-radius: 16px;
+  }
+
+  .tabs {
+    margin: 8px;
+    padding: 3px;
+  }
+
+  .tab {
+    padding: 8px;
+    font-size: 0.75rem;
+  }
+
+  .messages {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .message {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .inputArea {
+    padding: 12px;
+  }
+
+  .input {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .sendBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .usernameInput {
+    max-width: 80px;
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .forumMsg {
+    padding: 12px;
+  }
+
+  .forumUser {
+    font-size: 0.7rem;
+  }
+
+  .forumMsg p {
+    font-size: 0.9rem;
+  }
+
+  .forumTime {
+    font-size: 0.65rem;
+    top: 10px;
+    right: 10px;
   }
 }

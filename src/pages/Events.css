@@ -236,17 +236,130 @@
 }
 
 .modal-close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: red;
-    border: none;
-    color: white;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: red;
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .page-title {
+    font-size: 3.5rem;
+  }
+
+  .gallery-card {
+    min-width: 280px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .events-header {
+    padding-left: 1rem;
+    text-align: center;
+    padding-right: 1rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+  }
+
+  .page-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .gallery-list {
+    gap: 1rem;
+    padding: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .gallery-card {
+    min-width: 260px;
+    height: 380px;
+    padding: 1.5rem;
+  }
+
+  .card-date {
+    font-size: 2.5rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .modal-overlay {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    max-height: 95vh;
+  }
+
+  .modal-image {
+    height: 50vh;
+  }
+
+  .modal-info {
+    padding: 1.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .events-page {
+    padding-top: 80px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .gallery-card {
+    min-width: 240px;
+    height: 350px;
+  }
+
+  .card-date {
+    font-size: 2rem;
+    -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.6);
+  }
+
+  .view-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+  }
+
+  .modal-image {
+    height: 40vh;
+  }
+
+  .modal-info {
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
 }
