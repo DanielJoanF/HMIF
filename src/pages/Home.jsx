@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { apiService } from '../services/apiService';
+import { apiService, SERVER_URL } from '../services/apiService';
 import './Home.css';
 import logo from '../assets/logo.png';
 
@@ -96,7 +96,7 @@ const Home = () => {
                                 <div
                                     className={`event-image-container ${fade ? 'fade-in' : 'fade-out'}`}
                                     style={{
-                                        backgroundImage: `url(http://localhost:5000${currentEvent.imageUrl})`
+                                        backgroundImage: `url(${SERVER_URL}${currentEvent.imageUrl})`
                                     }}
                                 >
                                     <div className="event-overlay">

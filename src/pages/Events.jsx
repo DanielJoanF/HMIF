@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { apiService } from '../services/apiService';
+import { apiService, SERVER_URL } from '../services/apiService';
 import './Events.css';
 
 const Events = () => {
@@ -42,7 +42,7 @@ const Events = () => {
                         >
                             {/* Image as Background */}
                             <img
-                                src={`http://localhost:5000${doc.imageUrl}`}
+                                src={`${SERVER_URL}${doc.imageUrl}`}
                                 alt={doc.title}
                                 className="card-bg-image"
                             />
@@ -86,7 +86,7 @@ const Events = () => {
 
                             <div className="modal-image-container">
                                 <img
-                                    src={`http://localhost:5000${selectedImage.imageUrl}`}
+                                    src={`${SERVER_URL}${selectedImage.imageUrl}`}
                                     alt={selectedImage.title}
                                     className="modal-image"
                                 />

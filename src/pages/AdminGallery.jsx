@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiService } from '../services/apiService';
+import { apiService, API_BASE_URL, SERVER_URL } from '../services/apiService';
 import styles from './AdminGallery.module.css';
 
 const AdminGallery = () => {
@@ -60,7 +60,7 @@ const AdminGallery = () => {
         if (!confirm('Are you sure you want to delete this photo?')) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/api/admin/documentation/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/admin/documentation/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -73,7 +73,7 @@ const AdminGallery = () => {
 
     const handleUpdate = async (id, title, caption) => {
         try {
-            await fetch(`http://localhost:5000/api/admin/documentation/${id}`, {
+            await fetch(`${API_BASE_URL}/admin/documentation/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title, caption })
@@ -148,7 +148,7 @@ const AdminGallery = () => {
                 <div className={styles.grid}>
                     {documentation.map((doc) => (
                         <div key={doc._id} className={styles.card}>
-                            <img src={`http://localhost:5000${doc.imageUrl}`} alt={doc.title} />
+                            <img src={`${SERVER_URL}${doc.imageUrl}`} alt={doc.title} />
                             {editingId === doc._id ? (
                                 <div className={styles.editForm}>
                                     <input

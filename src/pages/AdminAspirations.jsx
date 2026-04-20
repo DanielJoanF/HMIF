@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiService } from '../services/apiService';
+import { apiService, API_BASE_URL } from '../services/apiService';
 import styles from './AdminAspirations.module.css';
 
 const AdminAspirations = () => {
@@ -33,7 +33,7 @@ const AdminAspirations = () => {
         if (!confirm('Delete this aspiration?')) return;
 
         try {
-            await fetch(`http://localhost:5000/api/admin/aspirations/${id}`, { method: 'DELETE' });
+            await fetch(`${API_BASE_URL}/admin/aspirations/${id}`, { method: 'DELETE' });
             fetchAspirations();
             alert('Deleted successfully!');
         } catch (error) {
