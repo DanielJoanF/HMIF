@@ -106,3 +106,12 @@ Pastikan:
 - Groq API: **Gratis tier** tersedia
 
 Untuk production, upgrade ke plan berbayar agar service tidak sleep.
+
+---
+
+## TODO — Infrastruktur (Manual, di luar repo)
+
+- [ ] **Pindahkan nameserver domain `hmif-usd.org`** dari `dns-parking.com` ke Cloudflare atau Hostinger yang proper.
+- [ ] **Aktifkan DNSSEC** setelah nameserver dipindahkan.
+- [ ] Setelah nameserver pindah ke Cloudflare, WAF/DDoS protection/OCSP stapling otomatis tersedia — tidak perlu konfigurasi tambahan di sisi aplikasi.
+- [ ] Pastikan `CLOUD_RUN_FRONTEND_URL` env var diatur di production untuk CSP `connectSrc` di Helmet (lihat `server/server.js`).
