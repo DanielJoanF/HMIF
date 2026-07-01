@@ -9,6 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
+import os
 
 import router
 import local_knowledge
@@ -41,10 +42,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS — allow requests from the frontend dev server
+# CORS — restrict to known frontend origins
+_default_origins = [
+    "https://hmif-usd.org",
+    "https://www.hmif-usd.org",
+    "http://localhost:5173",  # Vite dev server
+]
+_env_origins = os.getenv("ALLOWED_ORIGINS", "")
+ALLOWED_ORIGINS = [o.strip() for o in _env_origins.split(",") if o.strip()] if _env_origins else _default_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict to your frontend domain
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -111,11 +120,11 @@ async def chat(request: ChatRequest):
     # - Intent is HYBRID but local KB found nothing (supplement with web)
     # Skip web fetch if local KB already has data and intent is LOCAL or HYBRID
     # This reduces noise from generic web pages polluting the LLM context.
-    if intent == router.Intent.WEB or (not context_parts):
-        web_ctx = web_fetcher.fetch_all_sources()
-        if web_ctx:
-            context_parts.append(web_ctx)
-            sources.append("website_usd")
+    # if intent == router.Intent.WEB or (not context_parts):
+    #     web_ctx = web_fetcher.fetch_all_sources()
+    #     if web_ctx:
+    #         context_parts.append(web_ctx)
+    #         sources.append("website_usd")
 
     # Build final context
     if context_parts:
