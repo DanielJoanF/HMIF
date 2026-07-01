@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const ForumMessage = require('../models/ForumMessage');
+const { forumLimiter } = require('../middleware/rateLimiter');
+const { validateForumMessage } = require('../middleware/validate');
 
 // GET all forum messages
 router.get('/', async (req, res) => {
@@ -8,28 +10,24 @@ router.get('/', async (req, res) => {
         const messages = await ForumMessage.find().sort({ timestamp: 1 });
         res.json(messages);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch messages', details: error.message });
+        console.error('[Forum GET]', error.message);
+        res.status(500).json({ error: 'Failed to fetch messages' });
     }
 });
 
 // POST new forum message
-router.post('/', async (req, res) => {
+// [SECURITY] forumLimiter: 10 POSTs per 15 min per IP
+// [SECURITY] validateForumMessage: sanitizes username + text, enforces max length
+router.post('/', forumLimiter, validateForumMessage, async (req, res) => {
     try {
-        const { username, text } = req.body;
+        const { username, text } = req.body; // Already sanitized by middleware
 
-        if (!text || text.trim() === '') {
-            return res.status(400).json({ error: 'Message text is required' });
-        }
-
-        const newMessage = new ForumMessage({
-            username: username || 'Anonymous',
-            text: text.trim()
-        });
-
+        const newMessage = new ForumMessage({ username, text });
         const savedMessage = await newMessage.save();
         res.status(201).json(savedMessage);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to post message', details: error.message });
+        console.error('[Forum POST]', error.message);
+        res.status(500).json({ error: 'Failed to post message' });
     }
 });
 

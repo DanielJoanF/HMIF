@@ -1,35 +1,46 @@
 const express = require('express');
 const router = express.Router();
 const Aspiration = require('../models/Aspiration');
+const { aspirationLimiter } = require('../middleware/rateLimiter');
+const { validateAspiration } = require('../middleware/validate');
 
-// GET all aspirations
+// GET all aspirations — with pagination to prevent fetching 10K+ records
+// (After the spam attack, the collection may have thousands of entries)
 router.get('/', async (req, res) => {
     try {
-        const aspirations = await Aspiration.find().sort({ createdAt: -1 });
-        res.json(aspirations);
+        // Pagination: ?page=1&limit=100 (default: page 1, 100 per page, max 500)
+        const page = Math.max(1, parseInt(req.query.page) || 1);
+        const limit = Math.min(500, Math.max(1, parseInt(req.query.limit) || 100));
+        const skip = (page - 1) * limit;
+
+        const [aspirations, total] = await Promise.all([
+            Aspiration.find().sort({ createdAt: -1 }).skip(skip).limit(limit),
+            Aspiration.countDocuments()
+        ]);
+
+        res.json({
+            data: aspirations,
+            pagination: { page, limit, total, pages: Math.ceil(total / limit) }
+        });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch aspirations', details: error.message });
+        console.error('[Aspirations GET]', error.message);
+        res.status(500).json({ error: 'Failed to fetch aspirations' });
     }
 });
 
 // POST new aspiration
-router.post('/', async (req, res) => {
+// [SECURITY] aspirationLimiter: 5 POSTs per 15 min per IP (was the spam target)
+// [SECURITY] validateAspiration: sanitizes text, validates tag enum
+router.post('/', aspirationLimiter, validateAspiration, async (req, res) => {
     try {
-        const { tag, text } = req.body;
+        const { tag, text } = req.body; // Already sanitized by validateAspiration
 
-        if (!text || text.trim() === '') {
-            return res.status(400).json({ error: 'Aspiration text is required' });
-        }
-
-        const newAspiration = new Aspiration({
-            tag: tag || 'Umum',
-            text: text.trim()
-        });
-
+        const newAspiration = new Aspiration({ tag, text });
         const savedAspiration = await newAspiration.save();
         res.status(201).json(savedAspiration);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to post aspiration', details: error.message });
+        console.error('[Aspirations POST]', error.message);
+        res.status(500).json({ error: 'Failed to post aspiration' });
     }
 });
 
