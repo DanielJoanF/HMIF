@@ -40,7 +40,7 @@ const Navbar = () => {
         <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
             <div className={styles.navContainer}>
                 <div className={styles.logo}>
-                    <img src={logo} alt="HMIF Logo" className={styles.logoImage} />
+                    <img src={logo} alt="HMIF Logo" className={styles.logoImage} width="40" height="40" />
                 </div>
 
                 <div className={`${styles.burger} ${isMobileMenuOpen ? styles.active : ''}`} onClick={toggleMobileMenu}>

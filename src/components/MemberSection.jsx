@@ -9,7 +9,7 @@ const MemberCard = ({ jabatan, nama, foto, caption, isCoordinator, isLeader, onP
             onClick={() => foto && onPhotoClick(foto, nama, caption)}
         >
             {foto ? (
-                <img src={foto} alt={nama} className={styles.avatarImg} />
+                <img src={foto} alt={nama} className={styles.avatarImg} width="120" height="120" />
             ) : (
                 <span className={styles.avatarPlaceholder}>{nama.charAt(0)}</span>
             )}
@@ -99,7 +99,7 @@ const MemberSection = () => {
                 <div className={styles.modalOverlay} onClick={closePreview}>
                     <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
                         <button className={styles.modalClose} onClick={closePreview}>✕</button>
-                        <img src={previewData.foto} alt={previewData.nama} className={styles.modalImage} />
+                        <img src={previewData.foto} alt={previewData.nama} className={styles.modalImage} width="300" height="300" />
                         <p className={styles.modalName}>{previewData.nama}</p>
                         {previewData.caption && (
                             <p className={styles.modalCaption}>"{previewData.caption}"</p>

@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { apiService, SERVER_URL } from '../services/apiService';
+import { apiService, API_BASE_URL } from '../services/apiService';
 import './Home.css';
 import logo from '../assets/logo.png';
+
+/**
+ * Helper: build a displayable image src from a documentation document.
+ */
+const getImageSrc = (doc) => {
+    return `${API_BASE_URL}/documentation/${doc._id}/image`;
+};
 
 const Home = () => {
     const [events, setEvents] = useState([]);
@@ -48,7 +55,7 @@ const Home = () => {
 
                 {/* Background Logo Layer (Faded) */}
                 <div className="hero-logo-bg">
-                    <img src={logo} alt="HMIF Logo Background" />
+                    <img src={logo} alt="HMIF Logo Background" width="500" height="500" />
                 </div>
 
                 {/* Main Text Layer (Foreground) */}
@@ -96,7 +103,7 @@ const Home = () => {
                                 <div
                                     className={`event-image-container ${fade ? 'fade-in' : 'fade-out'}`}
                                     style={{
-                                        backgroundImage: `url(${SERVER_URL}${currentEvent.imageUrl})`
+                                        backgroundImage: `url(${getImageSrc(currentEvent)})`
                                     }}
                                 >
                                     <div className="event-overlay">

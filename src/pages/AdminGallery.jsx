@@ -1,7 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiService, API_BASE_URL, SERVER_URL } from '../services/apiService';
+import { apiService, API_BASE_URL } from '../services/apiService';
 import styles from './AdminGallery.module.css';
+
+/**
+ * Helper: build a displayable image src from a documentation document.
+ * Uses the dedicated image endpoint to lazy-load images individually,
+ * avoiding the MongoDB 32MB sort memory limit on the list query.
+ */
+const getImageSrc = (doc) => {
+    // Use the dedicated lazy-load image endpoint
+    return `${API_BASE_URL}/documentation/${doc._id}/image`;
+};
 
 const AdminGallery = () => {
     const [documentation, setDocumentation] = useState([]);
@@ -60,10 +70,8 @@ const AdminGallery = () => {
         if (!confirm('Are you sure you want to delete this photo?')) return;
 
         try {
-            const response = await fetch(`${API_BASE_URL}/admin/documentation/${id}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            // [SECURITY] Use apiService.delete() which attaches JWT Authorization header
+            await apiService.delete(`/admin/documentation/${id}`);
             fetchDocs();
             alert('Photo deleted successfully!');
         } catch (error) {
@@ -73,11 +81,8 @@ const AdminGallery = () => {
 
     const handleUpdate = async (id, title, caption) => {
         try {
-            await fetch(`${API_BASE_URL}/admin/documentation/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title, caption })
-            });
+            // [SECURITY] Use apiService.put() which attaches JWT Authorization header
+            await apiService.put(`/admin/documentation/${id}`, { title, caption });
             setEditingId(null);
             fetchDocs();
             alert('Updated successfully!');
@@ -148,7 +153,7 @@ const AdminGallery = () => {
                 <div className={styles.grid}>
                     {documentation.map((doc) => (
                         <div key={doc._id} className={styles.card}>
-                            <img src={`${SERVER_URL}${doc.imageUrl}`} alt={doc.title} />
+                            <img src={getImageSrc(doc)} alt={doc.title} width="300" height="200" />
                             {editingId === doc._id ? (
                                 <div className={styles.editForm}>
                                     <input

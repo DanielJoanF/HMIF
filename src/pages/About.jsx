@@ -2,7 +2,7 @@ import React from 'react';
 
 import MemberSection from '../components/MemberSection';
 import './About.css';
-import logo from '../assets/fotbar-HMIF.jpg';
+import logo from '../assets/Foto-bersama.png';
 
 const About = () => {
     return (
@@ -38,7 +38,7 @@ const About = () => {
                     {/* Right Section: Visual */}
                     <div className="about-visual-section">
                         <div className="visual-wrapper">
-                            <img src={logo} alt="HMIF Logo Art" />
+                            <img src={logo} alt="HMIF Logo Art" width="400" height="400" />
                             <div className="visual-overlay"></div>
                         </div>
                     </div>

@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
-import { apiService, SERVER_URL } from '../services/apiService';
+import { apiService, API_BASE_URL } from '../services/apiService';
 import './Events.css';
+
+/**
+ * Helper: build a displayable image src from a documentation document.
+ */
+const getImageSrc = (doc) => {
+    return `${API_BASE_URL}/documentation/${doc._id}/image`;
+};
 
 const Events = () => {
     const [documentation, setDocumentation] = useState([]);
@@ -42,9 +49,9 @@ const Events = () => {
                         >
                             {/* Image as Background */}
                             <img
-                                src={`${SERVER_URL}${doc.imageUrl}`}
+                                src={getImageSrc(doc)}
                                 alt={doc.title}
-                                className="card-bg-image"
+                                className="card-bg-image" width="500" height="300"
                             />
 
                             <div className="card-content">
@@ -86,9 +93,9 @@ const Events = () => {
 
                             <div className="modal-image-container">
                                 <img
-                                    src={`${SERVER_URL}${selectedImage.imageUrl}`}
+                                    src={getImageSrc(selectedImage)}
                                     alt={selectedImage.title}
-                                    className="modal-image"
+                                    className="modal-image" width="600" height="400"
                                 />
                             </div>
 
@@ -114,4 +121,3 @@ const Events = () => {
 };
 
 export default Events;
-

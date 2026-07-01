@@ -1,6 +1,6 @@
 import React from 'react';
 import './Contact.css';
-import logo from '../assets/fotbar-HMIF.jpg';
+import logo from '../assets/Foto-bersama.png';
 
 const Contact = () => {
     return (
@@ -39,7 +39,7 @@ const Contact = () => {
 
                 {/* Right: Visual */}
                 <div className="contact-visual">
-                    <img src={logo} alt="HMIF Logo Art" />
+                    <img src={logo} alt="HMIF Logo Art" width="500" height="400" />
                 </div>
 
             </div>
