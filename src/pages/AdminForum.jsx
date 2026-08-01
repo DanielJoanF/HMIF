@@ -32,7 +32,8 @@ const AdminForum = () => {
         if (!confirm('Delete this message?')) return;
 
         try {
-            await fetch(`${API_BASE_URL}/admin/forum/${id}`, { method: 'DELETE' });
+            // [SECURITY] Use apiService.delete() which attaches JWT Authorization header
+            await apiService.delete(`/admin/forum/${id}`);
             fetchMessages();
             alert('Deleted successfully!');
         } catch (error) {

@@ -1,39 +1,36 @@
 const express = require('express');
 const router = express.Router();
 const ChatbotMessage = require('../models/ChatbotMessage');
+const { chatbotLimiter, readLimiter } = require('../middleware/rateLimiter');
+const { validateChatbotMessage } = require('../middleware/validate');
+const { requireAuth } = require('../middleware/auth');
 
 // GET all chatbot messages
-router.get('/', async (req, res) => {
+// [SECURITY] requireAuth: Admin authentication required
+// [SECURITY] readLimiter: 30 GETs per 15 min per IP (prevents scraping)
+router.get('/', requireAuth, readLimiter, async (req, res) => {
     try {
         const messages = await ChatbotMessage.find().sort({ timestamp: 1 });
         res.json(messages);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch messages', details: error.message });
+        console.error('[Chatbot GET]', error.message);
+        res.status(500).json({ error: 'Failed to fetch messages' });
     }
 });
 
 // POST new chatbot message
-router.post('/', async (req, res) => {
+// [SECURITY] chatbotLimiter: 20 POSTs per 15 min per IP
+// [SECURITY] validateChatbotMessage: validates sender enum, sanitizes text
+router.post('/', chatbotLimiter, validateChatbotMessage, async (req, res) => {
     try {
-        const { sender, text } = req.body;
+        const { sender, text } = req.body; // Already sanitized by middleware
 
-        if (!sender || !text || text.trim() === '') {
-            return res.status(400).json({ error: 'Sender and text are required' });
-        }
-
-        if (!['user', 'bot'].includes(sender)) {
-            return res.status(400).json({ error: 'Sender must be either "user" or "bot"' });
-        }
-
-        const newMessage = new ChatbotMessage({
-            sender,
-            text: text.trim()
-        });
-
+        const newMessage = new ChatbotMessage({ sender, text });
         const savedMessage = await newMessage.save();
         res.status(201).json(savedMessage);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to post message', details: error.message });
+        console.error('[Chatbot POST]', error.message);
+        res.status(500).json({ error: 'Failed to post message' });
     }
 });
 

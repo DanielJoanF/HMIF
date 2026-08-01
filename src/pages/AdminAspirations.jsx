@@ -20,8 +20,9 @@ const AdminAspirations = () => {
 
     const fetchAspirations = async () => {
         try {
-            const data = await apiService.get('/aspirations');
-            setAspirations(data);
+            // API now returns paginated response: { data: [...], pagination: {...} }
+            const response = await apiService.get('/aspirations?limit=500');
+            setAspirations(response.data || response);
         } catch (error) {
             console.error('Failed to fetch:', error);
         } finally {
@@ -33,7 +34,8 @@ const AdminAspirations = () => {
         if (!confirm('Delete this aspiration?')) return;
 
         try {
-            await fetch(`${API_BASE_URL}/admin/aspirations/${id}`, { method: 'DELETE' });
+            // [SECURITY] Use apiService.delete() which attaches JWT Authorization header
+            await apiService.delete(`/admin/aspirations/${id}`);
             fetchAspirations();
             alert('Deleted successfully!');
         } catch (error) {

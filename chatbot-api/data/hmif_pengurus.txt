@@ -51,3 +51,6 @@ Anggota Divisi Sosial:
 
 Anggota Divisi Web Holder:
 • Daniel Joan Fernando
+
+Developer HMIF Platform:
+- Daniel Ganteng

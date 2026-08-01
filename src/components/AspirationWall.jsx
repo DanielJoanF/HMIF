@@ -14,8 +14,9 @@ const AspirationWall = () => {
 
     const fetchAspirations = async () => {
         try {
-            const data = await apiService.get('/aspirations');
-            setAspirations(data);
+            // API now returns paginated response: { data: [...], pagination: {...} }
+            const response = await apiService.get('/aspirations?limit=500');
+            setAspirations(response.data || response); // Fallback for backward compat
         } catch (error) {
             console.error('Failed to fetch aspirations:', error);
         }
@@ -36,7 +37,7 @@ const AspirationWall = () => {
             setAspirations(prev => [savedAspiration, ...prev]);
             setNewAspiration('');
             setSelectedTag('Umum');
-            alert('Aspirasi berhasil dikirim! 🎉');
+            alert('Aspirasi berhasil dikirim!');
         } catch (error) {
             console.error('Failed to submit aspiration:', error);
             alert('Gagal mengirim aspirasi. Pastikan server backend berjalan.');

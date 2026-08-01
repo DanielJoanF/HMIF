@@ -18,15 +18,23 @@ const AdminLogin = () => {
             const response = await apiService.post('/admin/login', { password });
 
             if (response.success) {
-                // Store auth token in sessionStorage
+                // [SECURITY] Store the JWT token returned from the server
+                // Previously only stored a boolean flag — now uses a real token
+                // that the server validates on every admin API call
                 sessionStorage.setItem('adminAuth', 'true');
+                sessionStorage.setItem('adminToken', response.token);
                 sessionStorage.setItem('loginTime', Date.now().toString());
                 navigate('/admin-hmif-secret');
             } else {
                 setError('Password salah!');
             }
         } catch (error) {
-            setError('Login gagal. Pastikan server berjalan.');
+            // Handle rate limit (429) with user-friendly message
+            if (error.status === 429) {
+                setError('Terlalu banyak percobaan login. Coba lagi dalam 15 menit.');
+            } else {
+                setError('Login gagal. Pastikan server berjalan.');
+            }
         } finally {
             setIsLoading(false);
         }

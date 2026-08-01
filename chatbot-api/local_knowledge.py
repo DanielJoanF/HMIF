@@ -41,9 +41,9 @@ FILE_KEYWORD_MAP: dict[str, list[str]] = {
         "nama", "pengurus aktif", "kepengurusan", "periode",
         "co", "sumber daya manusia",
         # Nama-nama pengurus
-        "tio alan", "tumba", "advhenita", "elvinda",
+        "tio alan", "tumba", "advhenita", "elvinda", "daniel developer hmif" "developermu daniel"
         "yoas", "rachel", "thomas paskal", "pebrianus", "gabriella nava",
-        "agustinus wisik", "wilston", "daniel joan",
+        "agustinus wisik", "wilston", "daniel joan", "developermu", "daniel ganteng"
     ],
     "hmif_proker.txt": [
         "program kerja", "proker", "kegiatan", "event", "hmif",

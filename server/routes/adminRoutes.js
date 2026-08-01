@@ -1,26 +1,57 @@
 const express = require('express');
+const crypto = require('crypto');
 const router = express.Router();
 const ForumMessage = require('../models/ForumMessage');
 const Aspiration = require('../models/Aspiration');
 const Documentation = require('../models/Documentation');
 const ChatbotMessage = require('../models/ChatbotMessage');
 const ActivityLog = require('../models/ActivityLog');
-const fs = require('fs');
-const path = require('path');
+const { generateToken, requireAuth } = require('../middleware/auth');
+const { loginLimiter } = require('../middleware/rateLimiter');
 
-// Simple admin password - in production, use proper authentication
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-// Login endpoint
-router.post('/login', (req, res) => {
+// ─── Login endpoint ─────────────────────────────────────────────────────────
+// [SECURITY] loginLimiter: 5 attempts per 15 min per IP (brute-force prevention)
+// [SECURITY] Returns JWT token instead of just { success: true }
+// [SECURITY] Uses constant-time comparison to prevent timing attacks
+router.post('/login', loginLimiter, (req, res) => {
     const { password } = req.body;
 
-    if (password === ADMIN_PASSWORD) {
-        res.json({ success: true, message: 'Login successful' });
+    if (!password || typeof password !== 'string') {
+        return res.status(400).json({ success: false, message: 'Password is required' });
+    }
+
+    // Constant-time comparison prevents timing attacks that could reveal
+    // password length or character matches
+    const inputBuffer = Buffer.from(password);
+    const correctBuffer = Buffer.from(ADMIN_PASSWORD || '');
+
+    // timingSafeEqual requires same-length buffers, so we also check length
+    const isCorrectLength = inputBuffer.length === correctBuffer.length;
+    // Pad to same length for the comparison (result is ignored if lengths differ)
+    const paddedInput = Buffer.alloc(correctBuffer.length);
+    inputBuffer.copy(paddedInput);
+
+    const isMatch = isCorrectLength && crypto.timingSafeEqual(paddedInput, correctBuffer);
+
+    if (isMatch) {
+        // Generate JWT for the authenticated session
+        const token = generateToken({ role: 'admin' });
+        res.json({
+            success: true,
+            message: 'Login successful',
+            token  // Frontend stores this and sends it with subsequent requests
+        });
     } else {
         res.status(401).json({ success: false, message: 'Invalid password' });
     }
 });
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ALL ROUTES BELOW THIS POINT REQUIRE AUTHENTICATION
+// ═══════════════════════════════════════════════════════════════════════════════
+router.use(requireAuth);
 
 // Get statistics
 router.get('/stats', async (req, res) => {
@@ -54,21 +85,23 @@ router.get('/stats', async (req, res) => {
             recentActivity
         });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch statistics', details: error.message });
+        console.error('[Admin Stats]', error.message);
+        res.status(500).json({ error: 'Failed to fetch statistics' });
     }
 });
 
 // Get recent activity logs
 router.get('/activity', async (req, res) => {
     try {
-        const limit = parseInt(req.query.limit) || 50;
+        const limit = Math.min(200, Math.max(1, parseInt(req.query.limit) || 50));
         const activities = await ActivityLog.find()
             .sort({ timestamp: -1 })
             .limit(limit);
 
         res.json(activities);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch activities', details: error.message });
+        console.error('[Admin Activity]', error.message);
+        res.status(500).json({ error: 'Failed to fetch activities' });
     }
 });
 
@@ -91,7 +124,8 @@ router.delete('/aspirations/:id', async (req, res) => {
 
         res.json({ success: true, message: 'Aspiration deleted' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete aspiration', details: error.message });
+        console.error('[Admin Delete Aspiration]', error.message);
+        res.status(500).json({ error: 'Failed to delete aspiration' });
     }
 });
 
@@ -104,11 +138,7 @@ router.delete('/documentation/:id', async (req, res) => {
             return res.status(404).json({ error: 'Documentation not found' });
         }
 
-        // Delete the actual file
-        const filePath = path.join(__dirname, '..', '..', 'uploads', path.basename(doc.imageUrl));
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
-        }
+        // Image data is stored in MongoDB as Base64, no file to delete from disk
 
         // Log activity
         await new ActivityLog({
@@ -120,7 +150,8 @@ router.delete('/documentation/:id', async (req, res) => {
 
         res.json({ success: true, message: 'Documentation deleted' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete documentation', details: error.message });
+        console.error('[Admin Delete Documentation]', error.message);
+        res.status(500).json({ error: 'Failed to delete documentation' });
     }
 });
 
@@ -149,7 +180,8 @@ router.put('/documentation/:id', async (req, res) => {
 
         res.json(doc);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to update documentation', details: error.message });
+        console.error('[Admin Update Documentation]', error.message);
+        res.status(500).json({ error: 'Failed to update documentation' });
     }
 });
 
@@ -172,7 +204,8 @@ router.delete('/forum/:id', async (req, res) => {
 
         res.json({ success: true, message: 'Forum message deleted' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete message', details: error.message });
+        console.error('[Admin Delete Forum]', error.message);
+        res.status(500).json({ error: 'Failed to delete message' });
     }
 });
 
