@@ -28,12 +28,14 @@ LOCAL=$(git rev-parse HEAD 2>/dev/null)
 REMOTE=$(git rev-parse origin/main 2>/dev/null)
 
 [ -z "$REMOTE" ] && { log "ERR: gak bisa baca origin/main"; exit 0; }
-[ "$LOCAL" = "$REMOTE" ] && exit 0   # gak ada perubahan -> diam
 
-# Deploy hanya kalau local TERTINGGAL dari origin/main (bukan lagi unpushed work)
-if ! git merge-base --is-ancestor "$LOCAL" "$REMOTE" 2>/dev/null; then
-  log "skip: commit lokal belum di-push (${LOCAL:0:7}), tunggu push"
-  exit 0
+# Deploy hanya kalau origin/main BERUBAH dari SHA terakhir yang berhasil ke-deploy
+LAST=$(cat "$MARKER" 2>/dev/null || echo "none")
+[ "$LAST" = "$REMOTE" ] && exit 0   # sudah di-deploy -> diam
+
+# Sinkronkan kode lokal (kalau server bukan yang push)
+if [ "$LOCAL" != "$REMOTE" ]; then
+  git pull --ff-only origin main 2>>"$LOG" || { log "ERR: git pull gagal (history diverged?)"; exit 0; }
 fi
 
 log "UPDATE: ${LOCAL:0:7} -> ${REMOTE:0:7}"
@@ -42,8 +44,6 @@ log "UPDATE: ${LOCAL:0:7} -> ${REMOTE:0:7}"
 for s in $SERVICES; do
   docker tag "$IMG/hmif-$s:latest" "$IMG/hmif-$s:prev" 2>/dev/null || true
 done
-
-git pull --ff-only origin main 2>>"$LOG" || { log "ERR: git pull gagal (ada perubahan lokal?)"; exit 0; }
 
 docker compose pull 2>>"$LOG" || { log "ERR: docker compose pull gagal"; exit 0; }
 docker compose up -d 2>>"$LOG" || { log "ERR: docker compose up gagal — rollback"; rollback; exit 0; }
