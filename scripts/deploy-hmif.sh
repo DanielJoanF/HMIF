@@ -30,6 +30,12 @@ REMOTE=$(git rev-parse origin/main 2>/dev/null)
 [ -z "$REMOTE" ] && { log "ERR: gak bisa baca origin/main"; exit 0; }
 [ "$LOCAL" = "$REMOTE" ] && exit 0   # gak ada perubahan -> diam
 
+# Deploy hanya kalau local TERTINGGAL dari origin/main (bukan lagi unpushed work)
+if ! git merge-base --is-ancestor "$LOCAL" "$REMOTE" 2>/dev/null; then
+  log "skip: commit lokal belum di-push (${LOCAL:0:7}), tunggu push"
+  exit 0
+fi
+
 log "UPDATE: ${LOCAL:0:7} -> ${REMOTE:0:7}"
 
 # Simpan image lama buat rollback
