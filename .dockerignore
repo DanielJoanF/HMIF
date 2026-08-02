@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-ssr
+.git
+*.log
+.env
+.DS_Store
+docs
+scripts
+.hermes
