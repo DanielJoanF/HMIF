@@ -18,14 +18,22 @@ const ChatWidget = () => {
   // Forum State
   const [forumMessages, setForumMessages] = useState([]);
   const [forumInput, setForumInput] = useState('');
+  const [forumHoneypot, setForumHoneypot] = useState('');
   const [username, setUsername] = useState('');
+  const [forumError, setForumError] = useState(null);
 
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const loadForumMessages = async () => {
-      const messages = await getForumMessages();
-      setForumMessages(messages);
+      setForumError(null);
+      try {
+        const messages = await getForumMessages();
+        setForumMessages(messages);
+      } catch (err) {
+        console.error('Failed to load forum messages:', err);
+        setForumError('Gagal memuat data forum, coba lagi nanti');
+      }
     };
     loadForumMessages();
   }, []);
@@ -46,7 +54,7 @@ const ChatWidget = () => {
 
     try {
       // Save user message to database
-      await apiService.post('/chatbot', { sender: 'user', text: userInputText });
+      await apiService.post('/chatbot', { sender: 'user', text: userInputText }).catch(() => null);
 
       const history = botMessages.filter(m => m.sender !== 'bot' || m.id !== 1);
       const response = await sendMessageToChatbot(history, userInputText);
@@ -55,9 +63,10 @@ const ChatWidget = () => {
       setBotMessages(prev => [...prev, botMessage]);
 
       // Save bot response to database
-      await apiService.post('/chatbot', { sender: 'bot', text: response });
+      await apiService.post('/chatbot', { sender: 'bot', text: response }).catch(() => null);
     } catch (error) {
       console.error('Error in chatbot:', error);
+      setBotMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: 'Gagal memuat data, coba lagi nanti' }]);
     } finally {
       setIsLoading(false);
     }
@@ -66,12 +75,15 @@ const ChatWidget = () => {
   const handleSendForumMessage = async () => {
     if (!forumInput.trim()) return;
     try {
-      const newMsg = await postForumMessage(username, forumInput);
-      setForumMessages(prev => [...prev, newMsg]);
+      const newMsg = await postForumMessage(username, forumInput, forumHoneypot);
+      if (newMsg && newMsg.id !== 'honeypot-blocked') {
+        setForumMessages(prev => [...prev, newMsg]);
+      }
       setForumInput('');
+      setForumHoneypot('');
     } catch (error) {
       console.error('Failed to send forum message:', error);
-      alert('Gagal mengirim pesan. Pastikan server backend berjalan.');
+      alert('Gagal mengirim pesan, coba lagi nanti.');
     }
   };
 
@@ -117,7 +129,7 @@ const ChatWidget = () => {
                     {msg.text}
                   </div>
                 ))}
-                {isLoading && <div className={`${styles.message} ${styles.botMsg}`}>Thinking...</div>}
+                {isLoading && <div className={`${styles.message} ${styles.botMsg}`}>Memuat jawaban...</div>}
                 <div ref={messagesEndRef} />
               </div>
               <div className={styles.inputArea}>
@@ -138,21 +150,35 @@ const ChatWidget = () => {
           {activeTab === 'forum' && (
             <div className={styles.content}>
               <div className={styles.messages}>
-                {forumMessages.length === 0 && (
+                {forumError ? (
+                  <p className={styles.emptyForum} style={{ color: '#ff6b6b' }}>{forumError}</p>
+                ) : forumMessages.length === 0 ? (
                   <p className={styles.emptyForum}>Belum ada pesan. Mulai diskusi!</p>
+                ) : (
+                  forumMessages.map(msg => (
+                    <div key={msg.id || msg._id} className={styles.forumMsg}>
+                      <span className={styles.forumUser}>{msg.username}</span>
+                      <p>{msg.text}</p>
+                      <span className={styles.forumTime}>
+                        {new Date(msg.timestamp || msg.createdAt || Date.now()).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    </div>
+                  ))
                 )}
-                {forumMessages.map(msg => (
-                  <div key={msg.id} className={styles.forumMsg}>
-                    <span className={styles.forumUser}>{msg.username}</span>
-                    <p>{msg.text}</p>
-                    <span className={styles.forumTime}>
-                      {new Date(msg.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}
-                    </span>
-                  </div>
-                ))}
                 <div ref={messagesEndRef} />
               </div>
               <div className={styles.inputArea}>
+                {/* Honeypot field */}
+                <input
+                  type="text"
+                  name="website"
+                  value={forumHoneypot}
+                  onChange={(e) => setForumHoneypot(e.target.value)}
+                  style={{ display: 'none' }}
+                  tabIndex="-1"
+                  autoComplete="off"
+                />
+
                 <input
                   type="text"
                   value={username}

@@ -35,11 +35,17 @@ async def lifespan(app: FastAPI):
 # APP INITIALIZATION
 # ============================================================
 
+# Determine environment
+IS_PRODUCTION = os.getenv("NODE_ENV") == "production" or os.getenv("ENVIRONMENT") == "production"
+
 app = FastAPI(
     title="USD Hybrid Knowledge Chatbot API",
     description="Chatbot API for Universitas Sanata Dharma using Groq LLM with hybrid local + web knowledge.",
     version="1.0.0",
     lifespan=lifespan,
+    docs_url=None if IS_PRODUCTION else "/docs",
+    redoc_url=None if IS_PRODUCTION else "/redoc",
+    openapi_url=None if IS_PRODUCTION else "/openapi.json",
 )
 
 # CORS — restrict to known frontend origins

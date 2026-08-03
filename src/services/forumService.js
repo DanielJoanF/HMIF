@@ -6,15 +6,16 @@ export const getForumMessages = async () => {
         return messages;
     } catch (error) {
         console.error('Failed to fetch forum messages:', error);
-        return [];
+        throw error;
     }
 };
 
-export const postForumMessage = async (username, text) => {
+export const postForumMessage = async (username, text, website = '') => {
     try {
         const newMessage = await apiService.post('/forum', {
             username: username || 'Anonymous',
-            text
+            text,
+            website
         });
         return newMessage;
     } catch (error) {
@@ -22,4 +23,3 @@ export const postForumMessage = async (username, text) => {
         throw error;
     }
 };
-

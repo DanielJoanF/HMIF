@@ -2,7 +2,7 @@
  * Input Validation & Sanitization Middleware
  * 
  * Validates and sanitizes all user input before it reaches route handlers.
- * Defense against XSS (stored), oversized payloads, and malformed data.
+ * Defense against XSS (stored), oversized payloads, malformed data, and SPAM (Honeypot).
  */
 
 // --- Utility: strip HTML tags to prevent stored XSS ---
@@ -35,11 +35,23 @@ const VALID_CHATBOT_SENDERS = ['user', 'bot'];
 
 /**
  * Validate POST /api/aspirations
+ * - website: honeypot field (must be empty)
  * - tag: must be one of the allowed enum values
  * - text: required, 1–1000 characters, HTML stripped
  */
 function validateAspiration(req, res, next) {
-    let { tag, text } = req.body;
+    let { tag, text, website } = req.body;
+
+    // Honeypot check: if website field is filled, silently reject spam
+    if (website && website.trim() !== '') {
+        console.warn(`[HONEYPOT] Blocked spam aspiration attempt from IP ${req.ip}`);
+        return res.status(200).json({
+            _id: 'honeypot-blocked',
+            tag: tag || 'Umum',
+            text: 'Aspirasi berhasil dikirim!',
+            createdAt: new Date().toISOString()
+        });
+    }
 
     // Sanitize text
     text = sanitizeString(text, 1000);
@@ -62,11 +74,23 @@ function validateAspiration(req, res, next) {
 
 /**
  * Validate POST /api/forum
+ * - website: honeypot field (must be empty)
  * - username: optional, max 50 characters, HTML stripped
  * - text: required, 1–2000 characters, HTML stripped
  */
 function validateForumMessage(req, res, next) {
-    let { username, text } = req.body;
+    let { username, text, website } = req.body;
+
+    // Honeypot check: if website field is filled, silently reject spam
+    if (website && website.trim() !== '') {
+        console.warn(`[HONEYPOT] Blocked spam forum message attempt from IP ${req.ip}`);
+        return res.status(200).json({
+            id: 'honeypot-blocked',
+            username: username || 'Anonymous',
+            text: 'Pesan berhasil dikirim!',
+            timestamp: new Date().toISOString()
+        });
+    }
 
     // Sanitize text
     text = sanitizeString(text, 2000);

@@ -32,6 +32,9 @@ jobs:
           context: .
           file: frontend/Dockerfile
           push: true
+          build-args: |
+            VITE_API_URL=https://hmif-usd.org/api
+            VITE_CHATBOT_API_URL=https://hmif-usd.org/chatbot
           tags: |
             ghcr.io/danieljoanf/hmif-frontend:latest
             ghcr.io/danieljoanf/hmif-frontend:${{ github.sha }}

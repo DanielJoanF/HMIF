@@ -1,37 +1,37 @@
-import tio from '../assets/Tio.png';
-import tumba from '../assets/Tumba.png';
-import vhean from '../assets/Vhean.jpg';
-import vinda from '../assets/Vinda.jpg';
-import paskal from '../assets/paskal.jpg';
-import nava from '../assets/Nava.jpg';
-import rachel from '../assets/Rachel.jpg';
-import yoas from '../assets/Yoass.jpeg';
-import regis from '../assets/Regis.png';
-import max from '../assets/Max.jpg';
-import jodi from '../assets/Jodi.png';
-import burju from '../assets/Burju.png';
-import felicia from '../assets/Felicc.JPG';
-import virly from '../assets/Virly.JPG';
-import putra from '../assets/Putra.png';
-import vany from '../assets/Vany.JPG';
-import yohana from '../assets/Yohana.jpg';
-import gelar from '../assets/Gelar.jpg';
-import robert from '../assets/Robert.jpg';
-import juan from '../assets/juan.jpg';
-import nada from '../assets/Nada.jpg';
-import bima from '../assets/Bima.jpg';
-import anel from '../assets/Anel.jpg';
-import angel from '../assets/Angel.jpg';
-import wisik from '../assets/Wisik.JPG';
-import mely from '../assets/Mely.JPG';
-import eko from '../assets/Eko.JPG';
-import dita from '../assets/Dita.JPG';
-import wilston from '../assets/Wilston.jpg';
-import daniel from '../assets/Daniel.jpg';
-import brian from '../assets/Brian.jpg';
-import celsia from '../assets/Celsi.jpg';
-import gaby from '../assets/Gaby.jpg';
-import pamungkas from '../assets/Pamungkas.jpg';
+import tio from '../assets/Tio.webp';
+import tumba from '../assets/Tumba.webp';
+import vhean from '../assets/Vhean.webp';
+import vinda from '../assets/Vinda.webp';
+import paskal from '../assets/paskal.webp';
+import nava from '../assets/Nava.webp';
+import rachel from '../assets/Rachel.webp';
+import yoas from '../assets/Yoass.webp';
+import regis from '../assets/Regis.webp';
+import max from '../assets/Max.webp';
+import jodi from '../assets/Jodi.webp';
+import burju from '../assets/Burju.webp';
+import felicia from '../assets/Felicc.webp';
+import virly from '../assets/Virly.webp';
+import putra from '../assets/Putra.webp';
+import vany from '../assets/Vany.webp';
+import yohana from '../assets/Yohana.webp';
+import gelar from '../assets/Gelar.webp';
+import robert from '../assets/Robert.webp';
+import juan from '../assets/juan.webp';
+import nada from '../assets/Nada.webp';
+import bima from '../assets/Bima.webp';
+import anel from '../assets/Anel.webp';
+import angel from '../assets/Angel.webp';
+import wisik from '../assets/Wisik.webp';
+import mely from '../assets/Mely.webp';
+import eko from '../assets/Eko.webp';
+import dita from '../assets/Dita.webp';
+import wilston from '../assets/Wilston.webp';
+import daniel from '../assets/Daniel.webp';
+import brian from '../assets/Brian.webp';
+import celsia from '../assets/Celsi.webp';
+import gaby from '../assets/Gaby.webp';
+import pamungkas from '../assets/Pamungkas.webp';
 
 export const hmifMembers = {
     title: "PENGURUS HMIF 2025/2026",
@@ -109,4 +109,3 @@ export const hmifMembers = {
         },
     ]
 };
-

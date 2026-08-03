@@ -7,8 +7,12 @@
  */
 const jwt = require('jsonwebtoken');
 
-// JWT secret — MUST be set in .env, fallback only for dev safety
-const JWT_SECRET = process.env.JWT_SECRET || 'hmif-dev-secret-change-me-in-production';
+// JWT secret — MUST be set in .env
+if (!process.env.JWT_SECRET) {
+    console.error('FATAL ERROR: JWT_SECRET environment variable is not set!');
+    process.exit(1);
+}
+const JWT_SECRET = process.env.JWT_SECRET;
 const TOKEN_EXPIRY = '8h'; // Admin sessions expire after 8 hours
 
 /**

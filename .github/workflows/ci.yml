@@ -18,7 +18,11 @@ jobs:
       - run: npm ci
       - name: Lint (non-blocking)
         run: npm run lint || true
-      - run: npm run build
+      - name: Build Frontend
+        env:
+          VITE_API_URL: https://hmif-usd.org/api
+          VITE_CHATBOT_API_URL: https://hmif-usd.org/chatbot
+        run: npm run build
 
   backend-check:
     name: Backend (check)

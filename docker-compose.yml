@@ -37,8 +37,6 @@ services:
       - "127.0.0.1:5000:5000"
     networks:
       - hmif-network
-    volumes:
-      - ../uploads:/app/uploads
 
   # Chatbot FastAPI Service
   chatbot:

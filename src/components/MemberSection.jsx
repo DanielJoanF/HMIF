@@ -9,7 +9,7 @@ const MemberCard = ({ jabatan, nama, foto, caption, isCoordinator, isLeader, onP
             onClick={() => foto && onPhotoClick(foto, nama, caption)}
         >
             {foto ? (
-                <img src={foto} alt={nama} className={styles.avatarImg} width="120" height="120" />
+                <img src={foto} alt={nama} className={styles.avatarImg} width="120" height="120" loading="lazy" decoding="async" />
             ) : (
                 <span className={styles.avatarPlaceholder}>{nama.charAt(0)}</span>
             )}

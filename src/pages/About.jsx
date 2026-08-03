@@ -1,10 +1,15 @@
 import React from 'react';
-
 import MemberSection from '../components/MemberSection';
+import { useSEO } from '../utils/seo';
 import './About.css';
-import logo from '../assets/Foto-bersama.png';
+import logo from '../assets/Foto-bersama.webp';
 
 const About = () => {
+    useSEO(
+        'Tentang Kami | HMIF USD',
+        'Profil, struktur organisasi, dan susunan pengurus Himpunan Mahasiswa Informatika Universitas Sanata Dharma.'
+    );
+
     return (
         <div className="page-container about-page">
             <div className="container">
@@ -38,7 +43,7 @@ const About = () => {
                     {/* Right Section: Visual */}
                     <div className="about-visual-section">
                         <div className="visual-wrapper">
-                            <img src={logo} alt="HMIF Logo Art" width="400" height="400" />
+                            <img src={logo} alt="Foto Bersama HMIF" width="400" height="400" loading="lazy" decoding="async" />
                             <div className="visual-overlay"></div>
                         </div>
                     </div>
@@ -47,7 +52,6 @@ const About = () => {
                 {/* Existing Sections */}
                 <div className="sections-wrapper">
                     <MemberSection />
-
                 </div>
 
             </div>

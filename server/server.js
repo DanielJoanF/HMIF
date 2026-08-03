@@ -15,13 +15,7 @@ const app = express();
 // Required for express-rate-limit to get the real client IP when running
 // behind a reverse proxy (Cloud Run, nginx, etc.). Without this, all
 // requests appear to come from 127.0.0.1 and rate limiting is useless.
-app.set('trust proxy', 1);
-
-// Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, '..', 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
-}
+// ─── SECURITY: Trust proxy ──────────────────────────────────────────────────
 
 // ─── SECURITY: Helmet — HTTP Security Headers ───────────────────────────────
 // Sets ~15 security headers including:
@@ -107,9 +101,6 @@ app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 // params, and query strings. Prevents NoSQL injection attacks like:
 //   { "password": { "$gt": "" } }  → password is stripped to {}
 app.use(mongoSanitize());
-
-// Serve uploaded files
-app.use('/uploads', express.static(uploadsDir));
 
 // MongoDB Connection
 const connectDB = async () => {

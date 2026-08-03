@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -40,7 +40,7 @@ const Navbar = () => {
         <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
             <div className={styles.navContainer}>
                 <div className={styles.logo}>
-                    <img src={logo} alt="HMIF Logo" className={styles.logoImage} width="40" height="40" />
+                    <img src={logo} alt="HMIF Logo" className={styles.logoImage} width="40" height="40" decoding="async" />
                 </div>
 
                 <div className={`${styles.burger} ${isMobileMenuOpen ? styles.active : ''}`} onClick={toggleMobileMenu}>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService, API_BASE_URL } from '../services/apiService';
+import { useSEO } from '../utils/seo';
 import './Events.css';
 
 /**
@@ -10,19 +11,31 @@ const getImageSrc = (doc) => {
 };
 
 const Events = () => {
+    useSEO(
+        'Kegiatan & Dokumentasi | HMIF USD',
+        'Galeri kegiatan dan dokumentasi acara Himpunan Mahasiswa Informatika Universitas Sanata Dharma.'
+    );
+
     const [documentation, setDocumentation] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchDocumentation();
     }, []);
 
     const fetchDocumentation = async () => {
+        setLoading(true);
+        setError(null);
         try {
             const data = await apiService.get('/documentation');
             setDocumentation(data);
-        } catch (error) {
-            console.error('Failed to fetch documentation:', error);
+        } catch (err) {
+            console.error('Failed to fetch documentation:', err);
+            setError('Gagal memuat data, coba lagi nanti');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -41,36 +54,54 @@ const Events = () => {
 
                 {/* Horizontal Scroll List */}
                 <div className="gallery-list">
-                    {documentation.map((doc) => (
-                        <div
-                            key={doc._id}
-                            className="gallery-card"
-                            onClick={() => setSelectedImage(doc)}
-                        >
-                            {/* Image as Background */}
-                            <img
-                                src={getImageSrc(doc)}
-                                alt={doc.title}
-                                className="card-bg-image" width="500" height="300"
-                            />
-
-                            <div className="card-content">
-                                <div className="card-date">
-                                    {new Date(doc.uploadedAt).toLocaleDateString('id-ID', {
-                                        day: '2-digit',
-                                        month: '2-digit'
-                                    }).replace('/', '.')}
-                                </div>
-                                <h3 className="card-title">{doc.title}</h3>
-                                {doc.caption && (
-                                    <p className="card-caption">{doc.caption}</p>
-                                )}
-                                <div className="view-btn">LIHAT DETAIL &rarr;</div>
-                            </div>
+                    {error ? (
+                        <div className="error-state" style={{ color: '#ff6b6b', padding: '2rem', textAlign: 'center', width: '100%' }}>
+                            <p>{error}</p>
+                            <button
+                                onClick={fetchDocumentation}
+                                style={{ marginTop: '1rem', padding: '0.5rem 1rem', background: '#ff6b6b', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                            >
+                                Coba Lagi
+                            </button>
                         </div>
-                    ))}
+                    ) : loading ? (
+                        <div className="loading-state" style={{ color: '#aaa', padding: '2rem', textAlign: 'center', width: '100%' }}>
+                            <p>Memuat kegiatan...</p>
+                        </div>
+                    ) : documentation.length > 0 ? (
+                        documentation.map((doc) => (
+                            <div
+                                key={doc._id}
+                                className="gallery-card"
+                                onClick={() => setSelectedImage(doc)}
+                            >
+                                {/* Image as Background */}
+                                <img
+                                    src={getImageSrc(doc)}
+                                    alt={doc.title}
+                                    className="card-bg-image"
+                                    width="500"
+                                    height="300"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
 
-                    {documentation.length === 0 && (
+                                <div className="card-content">
+                                    <div className="card-date">
+                                        {new Date(doc.uploadedAt).toLocaleDateString('id-ID', {
+                                            day: '2-digit',
+                                            month: '2-digit'
+                                        }).replace('/', '.')}
+                                    </div>
+                                    <h3 className="card-title">{doc.title}</h3>
+                                    {doc.caption && (
+                                        <p className="card-caption">{doc.caption}</p>
+                                    )}
+                                    <div className="view-btn">LIHAT DETAIL &rarr;</div>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
                         <div className="empty-state" style={{ color: '#666', padding: '2rem' }}>
                             <p>BELUM ADA DATA KEGIATAN</p>
                         </div>
@@ -95,7 +126,11 @@ const Events = () => {
                                 <img
                                     src={getImageSrc(selectedImage)}
                                     alt={selectedImage.title}
-                                    className="modal-image" width="600" height="400"
+                                    className="modal-image"
+                                    width="600"
+                                    height="400"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
 

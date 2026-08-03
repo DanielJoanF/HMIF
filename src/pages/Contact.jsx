@@ -1,8 +1,14 @@
 import React from 'react';
+import { useSEO } from '../utils/seo';
 import './Contact.css';
-import logo from '../assets/Foto-bersama.png';
+import logo from '../assets/Foto-bersama.webp';
 
 const Contact = () => {
+    useSEO(
+        'Kontak | HMIF USD',
+        'Hubungi Himpunan Mahasiswa Informatika Universitas Sanata Dharma melalui email, media sosial, atau sekretariat di Kampus III USD.'
+    );
+
     return (
         <div className="contact-page">
             <div className="contact-grid">
@@ -39,7 +45,7 @@ const Contact = () => {
 
                 {/* Right: Visual */}
                 <div className="contact-visual">
-                    <img src={logo} alt="HMIF Logo Art" width="500" height="400" />
+                    <img src={logo} alt="HMIF Foto Bersama" width="500" height="400" loading="lazy" decoding="async" />
                 </div>
 
             </div>

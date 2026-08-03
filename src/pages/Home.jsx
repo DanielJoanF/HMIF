@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { apiService, API_BASE_URL } from '../services/apiService';
+import { useSEO } from '../utils/seo';
 import './Home.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 /**
  * Helper: build a displayable image src from a documentation document.
@@ -12,20 +13,32 @@ const getImageSrc = (doc) => {
 };
 
 const Home = () => {
+    useSEO(
+        'Beranda | HMIF USD',
+        'Himpunan Mahasiswa Informatika Universitas Sanata Dharma - Pusat informasi, kegiatan, dan aspirasi mahasiswa.'
+    );
+
     const [events, setEvents] = useState([]);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
     const [fade, setFade] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     // Fetch Events
     useEffect(() => {
         const fetchEvents = async () => {
+            setLoading(true);
+            setError(null);
             try {
                 const data = await apiService.get('/documentation');
                 // Sort by date descending (newest first)
                 const sortedData = data.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
                 setEvents(sortedData.slice(0, 5)); // Take latest 5 events
-            } catch (error) {
-                console.error('Failed to fetch events:', error);
+            } catch (err) {
+                console.error('Failed to fetch events:', err);
+                setError('Gagal memuat data, coba lagi nanti');
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -55,7 +68,7 @@ const Home = () => {
 
                 {/* Background Logo Layer (Faded) */}
                 <div className="hero-logo-bg">
-                    <img src={logo} alt="HMIF Logo Background" width="500" height="500" />
+                    <img src={logo} alt="HMIF Logo Background" width="500" height="500" loading="lazy" decoding="async" />
                 </div>
 
                 {/* Main Text Layer (Foreground) */}
@@ -98,7 +111,11 @@ const Home = () => {
                     </div>
 
                     <div className="card-image">
-                        {currentEvent ? (
+                        {error ? (
+                            <div style={{ width: '100%', height: '100%', background: 'rgba(255, 0, 0, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', textAlign: 'center' }}>
+                                <span style={{ color: '#ff6b6b', fontSize: '0.85rem' }}>{error}</span>
+                            </div>
+                        ) : currentEvent ? (
                             <>
                                 <div
                                     className={`event-image-container ${fade ? 'fade-in' : 'fade-out'}`}
@@ -119,10 +136,14 @@ const Home = () => {
                                     ▶
                                 </Link>
                             </>
-                        ) : (
-                            // Loading / Empty State
+                        ) : loading ? (
+                            // Loading State
                             <div style={{ width: '100%', height: '100%', background: 'linear-gradient(45deg, #111, #333)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                 <span style={{ color: '#666', fontSize: '0.8rem' }}>Memuat Kegiatan...</span>
+                            </div>
+                        ) : (
+                            <div style={{ width: '100%', height: '100%', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <span style={{ color: '#666', fontSize: '0.8rem' }}>Belum ada kegiatan.</span>
                             </div>
                         )}
                     </div>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiService } from '../services/apiService';
+import { useSEO } from '../utils/seo';
 import styles from './AdminLogin.module.css';
 
 const AdminLogin = () => {
+    useSEO('Admin Login | HMIF USD', 'Halaman login admin HMIF Platform Dashboard.');
+
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
