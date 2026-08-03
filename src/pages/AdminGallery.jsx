@@ -59,7 +59,8 @@ const AdminGallery = () => {
             setUploadData({ title: '', caption: '', image: null });
             fetchDocs();
             alert('Photo uploaded successfully!');
-        } catch (error) {
+        } catch (err) {
+            console.error('Failed to upload photo:', err);
             alert('Failed to upload. Ensure server is running.');
         } finally {
             setIsUploading(false);
@@ -74,7 +75,8 @@ const AdminGallery = () => {
             await apiService.delete(`/admin/documentation/${id}`);
             fetchDocs();
             alert('Photo deleted successfully!');
-        } catch (error) {
+        } catch (err) {
+            console.error('Failed to delete photo:', err);
             alert('Failed to delete photo.');
         }
     };
@@ -86,7 +88,8 @@ const AdminGallery = () => {
             setEditingId(null);
             fetchDocs();
             alert('Updated successfully!');
-        } catch (error) {
+        } catch (err) {
+            console.error('Failed to update photo:', err);
             alert('Failed to update.');
         }
     };

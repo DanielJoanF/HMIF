@@ -36,7 +36,8 @@ const AdminForum = () => {
             await apiService.delete(`/admin/forum/${id}`);
             fetchMessages();
             alert('Deleted successfully!');
-        } catch (error) {
+        } catch (err) {
+            console.error('Failed to delete forum message:', err);
             alert('Failed to delete.');
         }
     };

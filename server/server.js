@@ -137,7 +137,7 @@ app.get('/api/health', (req, res) => {
 // ─── SECURITY: Error Handler — Hide Details in Production ───────────────────
 // Previously: sent err.message to the client (leaks stack traces, DB info, etc.)
 // Now: only shows details in development mode
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
     console.error(err.stack); // Always log full error server-side
 
     const isDev = process.env.NODE_ENV !== 'production';

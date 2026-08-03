@@ -38,7 +38,8 @@ const AdminAspirations = () => {
             await apiService.delete(`/admin/aspirations/${id}`);
             fetchAspirations();
             alert('Deleted successfully!');
-        } catch (error) {
+        } catch (err) {
+            console.error('Failed to delete aspiration:', err);
             alert('Failed to delete.');
         }
     };
